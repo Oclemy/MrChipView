@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.devosha.mrchipview"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+/**
+ * We are excluding the the `support-v4` as it's already defined in our ChipView library,
+ * otherwise we may get `Program type already present: android.support.v4.app.BackStackRecord$Op` error
+ */
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation ('com.github.jakebonk:ChipView:1.0.1'){
+        exclude module: 'support-v4'
+    }
+
+}
